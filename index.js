@@ -1,7 +1,12 @@
 // TODO: Include packages needed for this application
 const fs  = require("fs");
 const inquirer = require("inquirer");
+const path = require("path");
+const generateMarkdown = require("./utils/generateMarkdown");
 // TODO: Create an array of questions for user input
+
+
+  
 
 inquirer
     .prompt([
@@ -48,7 +53,7 @@ inquirer
       {
           type: 'input',
           message: 'Put in any third-party-assets that you used',
-          name: 'third-party',
+          name: 'thirdParty',
       },
       {
           type: 'input',
@@ -56,99 +61,26 @@ inquirer
           name: 'links',
       },
       {
-          type: 'input',
-
-      }
+          type: 'list',
+          message: 'What kind of license should your project have',
+          name: 'license',
+          choices: ['MIT','APACHE2.0','GPL3.0','BSD3','none'],
+      },
     ])
-    .then((response) =>
-        fs.writeFile('readme.md',`
-## ${response.projectName}
+  
 
-##### Table of Contents
-
-[Description] (#Description)
-[Installation] (#Installation)
-[Usage] (#Usage)
-[Credits] (#Credits)
-
-
-
-## Description
-${response.description}
-
-# What was learned
-* ${response.learn1}
-* ${response.learn2}
-* ${response.learn3}
-
-
-## Installation
-${response.required}
-
-## Usage
-${response.usage}
-
-## Credits
-${response.collaborators}
-${response.third-party}
-${response.links}
-
-## License
-
-
-`
-            , (err) =>
-                err ? console.error(err) : console.log('Success!'))
-    );
-
-
-// inquirer.prompt([
-
-    // {
-    //     type:'input',
-    //     message: 'whats the name of your project',
-    //     name: 'projectName'
-    // },
-    // {
-    //     type:'input',
-    //     message: 'Give a brief description of your project',
-    //     name: 'description'
-    // },
-    // {
-    //     type:'input',
-    //     message: 'What was your motivation for the project?',
-    //     name: 'motivation'
-    // },
-    // {
-    //     type:'input',
-    //     message: 'What was something you learned (1 of 3)',
-    //     name: 'learn1',
-    // },
-    // {
-    //     type:'input',
-    //     message: 'What was something you learned (2 of 3)',
-    //     name: 'learn2',
-    // },
-    // {
-    //     type:'input',
-    //     message: 'What was something you learned (3 of 3)',
-    //     name: 'learn3',
-    // },
-    // {
-    //     type:'input',
-    //     message: 'What installations are needed to complete this project (required)',
-    //     name: 'required',
-    // },
-// ])
-// .then((response) =>;'Readme.md', `
-//             (err) =>
-//                 err ? console.error(err) : console.log('Success!')
-//     )
-// );
-
-
+function writeToFile(fileName,respnose){
+    return fs.writeFileSync(path.join(process.cwd(),fileName),respnose)
+}
 // TODO: Create a function to initialize app
-function init() {}
+function init() {
+    inquirer.prompt(question).then(inquirerResponses =>{
+        console.log("generating readme.md");
+        writeToFile("README.md",generateMarkdown({
+            ...inquirerResponses
+        }))
+    })
+}
 
 // Function call to initialize app
 init()
