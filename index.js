@@ -70,7 +70,7 @@ inquirer
   
 
 function writeToFile(fileName,respnose){
-    return fs.writeFileSync(path.join(process.cwd(),fileName),respnose)
+    return fs.writeFileSync(path.join(process.cwd(),fileName),response)
 }
 // TODO: Create a function to initialize app
 function init() {
