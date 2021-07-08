@@ -8,8 +8,7 @@ const generateMarkdown = require("./utils/generateMarkdown");
 
   
 
-inquirer
-    .prompt([
+const questions = [
         {
             type: 'input',
             message: 'What is the name of your project',
@@ -66,15 +65,15 @@ inquirer
           name: 'license',
           choices: ['MIT','APACHE2.0','GPL3.0','BSD3','none'],
       },
-    ])
+    ]
   
 
-function writeToFile(fileName,respnose){
+function writeToFile(fileName,response){
     return fs.writeFileSync(path.join(process.cwd(),fileName),response)
 }
 // TODO: Create a function to initialize app
 function init() {
-    inquirer.prompt(question).then(inquirerResponses =>{
+    inquirer.prompt(questions).then(inquirerResponses =>{
         console.log("generating readme.md");
         writeToFile("README.md",generateMarkdown({
             ...inquirerResponses
