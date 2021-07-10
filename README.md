@@ -1,41 +1,29 @@
+#### README-Generator
 
-## m
-![GitHub license](https://img.shields.io/badge/license-BSD3-blue.svg)
+click here https://drive.google.com/file/d/1mUa_48W6SIZdqBFiz2Bix9I0iPQHQtRz/view for the viewing of the video!
 
-##### Table of Contents
+## Description
+
+This application allows the user to generate a README using the given prompts
 
 * [Description](#description)
 * [Installation](#installation)
 * [Usage](#usage)
 * [Credits](#credits)
 
-* [License](#license)
-
-
-
-
-## Description
-y
-
-# What was learned
-* u
-* i
-* undefined
-
 
 ## Installation
-a
+
+Inquirer and path is required to run this application
 
 ## Usage
-h
+
+Here's how to run the application:
+
+```
+node index.js
+```
 
 ## Credits
-* i
-* u
-* y
 
-
-## License
-    
-this project is licensed under BSD3 license
-
+My instructors and my tutor were the main helpers for me in this project!
